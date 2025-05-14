@@ -9,6 +9,9 @@ datasource db {
 
 model Counter {
   id       Int    @id @default(autoincrement())
-  username String @unique
+  username String
+  platform String
   count    Int    @default(0)
+
+  @@unique([username, platform], name: "username_platform")
 }

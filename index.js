@@ -8,17 +8,16 @@ app.get('/', (req, res) => {
   res.send('Server is running, https://github.com/vuthanhtrung2010/visitor-counter/');
 });
 
-app.get('/:username/count.svg', async (req, res) => {
-  const { username } = req.params;
+app.get('/:username/:platform/count.svg', async (req, res) => {
+  const { username, platform } = req.params;
 
   const counter = await prisma.counter.upsert({
-    where: { username },
+    where: { username_platform: { username, platform } },
     update: { count: { increment: 1 } },
-    create: { username, count: 1 },
+    create: { username, platform, count: 1 },
   });
 
   const digits = String(counter.count).split('');
-
   const cellW = 20;
   const cellH = 30;
   const padding = 2;
@@ -29,7 +28,7 @@ app.get('/:username/count.svg', async (req, res) => {
     const x = i * (cellW + padding);
     return `
       <rect x="${x}" y="0" width="${cellW}" height="${cellH}" rx="4" ry="4" fill="#000"/>
-      <text x="${x + cellW/2}" y="${cellH*0.7}"
+      <text x="${x + cellW / 2}" y="${cellH * 0.7}"
             font-family="monospace" font-size="20"
             text-anchor="middle" fill="#0f0">
         ${d}
