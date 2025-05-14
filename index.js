@@ -5,7 +5,7 @@ const app = express();
 const prisma = new PrismaClient();
 
 app.get('/', (req, res) => {
-  res.send('Server is running');
+  res.send('Server is running, https://github.com/vuthanhtrung2010/visitor-counter/');
 });
 
 app.get('/:username/count.svg', async (req, res) => {
@@ -37,7 +37,6 @@ app.get('/:username/count.svg', async (req, res) => {
     `;
   }).join('');
 
-  // 5) assemble final SVG
   const svg = `
     <svg xmlns="http://www.w3.org/2000/svg"
          width="${totalW}" height="${totalH}">
