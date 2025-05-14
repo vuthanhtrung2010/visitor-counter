@@ -1,8 +1,19 @@
-const express = require('express');
-const { PrismaClient } = require('@prisma/client');
+import express from 'express';
+import { PrismaClient } from '@prisma/client';
+import rateLimit from 'express-rate-limit';
 
 const app = express();
 const prisma = new PrismaClient();
+
+const limiter = rateLimit({
+  windowMs: 5 * 60 * 1000,
+  max: 1000,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: 'Too many requests, please try again later.',
+});
+
+app.use(limiter);
 
 app.get('/', (req, res) => {
   res.send('Server is running, https://github.com/vuthanhtrung2010/visitor-counter/');
