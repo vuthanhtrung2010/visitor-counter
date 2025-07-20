@@ -1,3 +1,14 @@
-node_modules
-# Keep environment variables out of version control
-.env.keys
+.DS_Store
+/node_modules/
+*.tsbuildinfo
+
+# React Router
+/.react-router/
+/build/
+
+# Cloudflare
+.mf
+.wrangler
+
+# Environment variables
+.env

@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "visitor-counter",
+  "compatibility_date": "2025-04-04",
+  "main": "./workers/app.ts",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "visitor-counter",
+      "database_id": "13c9e1fc-5c90-454b-98dc-d45e78b6e492",
+      "migrations_dir": "drizzle"
+    }
+  ]
+}
